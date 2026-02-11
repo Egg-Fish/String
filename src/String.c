@@ -61,6 +61,13 @@ bool String_equals(String s1, String s2) {
 
     bool isEqual = true;
 
+    for (size_t i = 0; i < s1Length; i++) {
+        if (s1->buffer[i] != s2->buffer[i]) {
+            isEqual = false;
+            break;
+        }
+    }
+
     return isEqual;
 }
 
