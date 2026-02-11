@@ -21,6 +21,14 @@ enable_testing()
 
 # Test executables
 
-add_executable(Test__String_equals test/Test__String_equals.c)
-target_link_libraries(Test__String_equals PRIVATE String unity)
-add_test(NAME Test:String__equals COMMAND Test__String_equals)
+add_executable(test__String_equals test/String_equals.c)
+target_link_libraries(test__String_equals PRIVATE String unity)
+add_test(NAME Test:String_equals COMMAND test__String_equals)
+
+add_executable(test__String_startsWith test/String_startsWith.c)
+target_link_libraries(test__String_startsWith PRIVATE String unity)
+add_test(NAME Test:String_startsWith COMMAND test__String_startsWith)
+
+add_executable(test__String_endsWith test/String_endsWith.c)
+target_link_libraries(test__String_endsWith PRIVATE String unity)
+add_test(NAME Test:String_endsWith COMMAND test__String_endsWith)
