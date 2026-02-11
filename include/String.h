@@ -9,6 +9,8 @@ String String_createFromBuffer(const char *buffer, size_t bufferSize);
 String String_createFromLiteral(const char *literal);
 void String_destroy(String s);
 
+size_t String_getLength(String s);
+
 bool String_equals(String s1, String s2);
 
 void String_print(String s);

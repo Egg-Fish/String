@@ -47,6 +47,10 @@ void String_destroy(String s) {
     return;
 }
 
+size_t String_getLength(String s) {
+    return s->length;
+}
+
 bool String_equals(String s1, String s2) {
     size_t s1Length = s1->length;
     size_t s2Length = s2->length;
