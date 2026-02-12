@@ -49,6 +49,28 @@ void String_destroy(String s) {
 
 size_t String_getLength(String s) { return s->length; }
 
+void String_append(String s, String suffix) {
+    size_t sLength = String_getLength(s);
+    size_t suffixLength = String_getLength(suffix);
+
+    size_t newLength = sLength + suffixLength;
+    char *newBuffer = malloc(newLength);
+
+    for (size_t i = 0; i < newLength; i++) {
+        if (i < sLength) {
+            newBuffer[i] = s->buffer[i];
+        } else {
+            newBuffer[i] = suffix->buffer[i - sLength];
+        }
+    }
+
+    free(s->buffer);
+    s->buffer = newBuffer;
+    s->length = newLength;
+
+    return;
+}
+
 bool String_equals(String s1, String s2) {
     size_t s1Length = s1->length;
     size_t s2Length = s2->length;
