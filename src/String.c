@@ -71,6 +71,28 @@ void String_append(String s, String suffix) {
     return;
 }
 
+void String_prepend(String s, String prefix) {
+    size_t sLength = String_getLength(s);
+    size_t prefixLength = String_getLength(prefix);
+
+    size_t newLength = sLength + prefixLength;
+    char *newBuffer = malloc(newLength);
+
+    for (size_t i = 0; i < newLength; i++) {
+        if (i < prefixLength) {
+            newBuffer[i] = prefix->buffer[i];
+        } else {
+            newBuffer[i] = s->buffer[i - prefixLength];
+        }
+    }
+
+    free(s->buffer);
+    s->buffer = newBuffer;
+    s->length = newLength;
+
+    return;
+}
+
 bool String_equals(String s1, String s2) {
     size_t s1Length = s1->length;
     size_t s2Length = s2->length;

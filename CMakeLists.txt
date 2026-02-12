@@ -25,6 +25,10 @@ add_executable(test__String_append test/String_append.c)
 target_link_libraries(test__String_append PRIVATE String unity)
 add_test(NAME Test:String_append COMMAND test__String_append)
 
+add_executable(test__String_prepend test/String_prepend.c)
+target_link_libraries(test__String_prepend PRIVATE String unity)
+add_test(NAME Test:String_prepend COMMAND test__String_prepend)
+
 add_executable(test__String_equals test/String_equals.c)
 target_link_libraries(test__String_equals PRIVATE String unity)
 add_test(NAME Test:String_equals COMMAND test__String_equals)
