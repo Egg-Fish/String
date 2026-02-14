@@ -14,6 +14,8 @@ const char *String_getBuffer(String s);
 
 void String_substring(String s, size_t start, size_t end);
 
+void String_trimLeadingWhitespace(String s);
+
 void String_append(String s, String suffix);
 void String_prepend(String s, String prefix);
 

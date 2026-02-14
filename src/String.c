@@ -88,6 +88,34 @@ void String_substring(String s, size_t start, size_t end) {
     return;
 }
 
+bool Char_isWhitespace(char c) {
+    return c == ' ' || c == '\t' || c == '\n' || c == '\r';
+}
+
+void String_trimLeadingWhitespace(String s) {
+    const char *buffer = String_getBuffer(s);
+    size_t length = String_getLength(s);
+
+    size_t newLength = length;
+
+    while (newLength > 0) {
+        if (Char_isWhitespace(*buffer)) {
+            newLength--;
+            buffer++;
+        } else {
+            break;
+        }
+    }
+
+    size_t offsetFromBuffer = length - newLength;
+    size_t newOffset = String_getOffset(s) + offsetFromBuffer;
+
+    String_setLength(s, newLength);
+    String_setOffset(s, newOffset);
+
+    return;
+}
+
 void String_append(String s, String suffix) {
     size_t sLength = String_getLength(s);
     size_t suffixLength = String_getLength(suffix);
