@@ -50,7 +50,22 @@ void String_destroy(String s) {
 }
 
 size_t String_getLength(String s) { return s->length; }
+void String_setLength(String s, size_t length) {
+    s->length = length;
+    return;
+}
+
 const char *String_getBuffer(String s) { return s->buffer + s->offset; }
+void String_setBuffer(String s, char *buffer) {
+    s->buffer = buffer;
+    return;
+}
+
+size_t String_getOffset(String s) { return s->offset; }
+void String_setOffset(String s, size_t offset) {
+    s->offset = offset;
+    return;
+}
 
 void String_append(String s, String suffix) {
     size_t sLength = String_getLength(s);
@@ -70,10 +85,10 @@ void String_append(String s, String suffix) {
         }
     }
 
-    free(s->buffer);
-    s->buffer = newBuffer;
-    s->offset = 0;
-    s->length = newLength;
+    free((char *)sBuffer);
+    String_setLength(s, newLength);
+    String_setOffset(s, 0);
+    String_setBuffer(s, newBuffer);
 
     return;
 }
@@ -96,11 +111,11 @@ void String_prepend(String s, String prefix) {
         }
     }
 
-    free(s->buffer);
-    s->buffer = newBuffer;
-    s->offset = 0;
-    s->length = newLength;
-
+    free((char *)sBuffer);
+    String_setLength(s, newLength);
+    String_setOffset(s, 0);
+    String_setBuffer(s, newBuffer);
+    
     return;
 }
 
