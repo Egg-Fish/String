@@ -136,7 +136,7 @@ void String_prepend(String s, String prefix) {
     String_setLength(s, newLength);
     String_setOffset(s, 0);
     String_setBuffer(s, newBuffer);
-    
+
     return;
 }
 

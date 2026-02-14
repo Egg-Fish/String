@@ -20,8 +20,7 @@ void property__String_append__sound(const char *s1, const char *s2, const char *
     char message[1024];
 
     snprintf(message, 1024,
-             "String_append(s = String(%s), String(%s)) -> s = String(%s)",
-             s1, s2, s3);
+             "String_append(s = String(%s), String(%s)) -> s = String(%s)", s1, s2, s3);
 
     TEST_ASSERT_TRUE_MESSAGE(String_equals(string1, string3), message);
 
