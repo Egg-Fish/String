@@ -10,6 +10,7 @@ String String_createFromLiteral(const char *literal);
 void String_destroy(String s);
 
 size_t String_getLength(String s);
+const char *String_getBuffer(String s);
 
 void String_append(String s, String suffix);
 void String_prepend(String s, String prefix);

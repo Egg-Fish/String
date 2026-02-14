@@ -48,6 +48,7 @@ void String_destroy(String s) {
 }
 
 size_t String_getLength(String s) { return s->length; }
+const char *String_getBuffer(String s) { return s->buffer; }
 
 void String_append(String s, String suffix) {
     size_t sLength = String_getLength(s);
