@@ -73,11 +73,13 @@ void String_substring(String s, size_t start, size_t end) {
     if (start >= length) {
         String_setLength(s, 0);
         return;
-    } else if (end > length) {
-        return;
     } else if (start > end) {
         String_setLength(s, 0);
         return;
+    }
+
+    if (end > length) {
+        end = length;
     }
 
     size_t newLength = end - start; // end is exclusive

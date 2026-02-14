@@ -41,6 +41,10 @@ void test__String_substring__sound__helloWorldString(void) {
     property__String_substring__sound("Hello world!", 11, 12, "!");
     property__String_substring__sound("Hello world!", 0, 12, "Hello world!");
     property__String_substring__sound("Hello world!", 0, 13, "Hello world!");
+    property__String_substring__sound("Hello world!", 6, 20, "world!");
+    property__String_substring__sound("Hello world!", 20, 0, "");
+    property__String_substring__sound("Hello world!", 0, 0, "");
+    property__String_substring__sound("Hello world!", 20, 26, "");
 }
 
 int main(void) {
