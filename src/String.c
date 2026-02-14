@@ -67,6 +67,27 @@ void String_setOffset(String s, size_t offset) {
     return;
 }
 
+void String_substring(String s, size_t start, size_t end) {
+    size_t length = String_getLength(s);
+
+    if (start >= length) {
+        String_setLength(s, 0);
+        return;
+    } else if (end > length) {
+        return;
+    } else if (start > end) {
+        String_setLength(s, 0);
+        return;
+    }
+
+    size_t newLength = end - start; // end is exclusive
+
+    String_setLength(s, newLength);
+    String_setOffset(s, start);
+
+    return;
+}
+
 void String_append(String s, String suffix) {
     size_t sLength = String_getLength(s);
     size_t suffixLength = String_getLength(suffix);
