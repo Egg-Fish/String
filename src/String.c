@@ -7,6 +7,7 @@
 
 struct String {
     size_t length;
+    size_t offset;
     char *buffer;
 };
 
@@ -14,6 +15,7 @@ String String_createFromBuffer(const char *buffer, size_t bufferSize) {
     String s = malloc(sizeof(struct String));
 
     s->length = bufferSize;
+    s->offset = 0;
     s->buffer = malloc(bufferSize);
 
     for (size_t i = 0; i < bufferSize; i++) {
@@ -48,7 +50,7 @@ void String_destroy(String s) {
 }
 
 size_t String_getLength(String s) { return s->length; }
-const char *String_getBuffer(String s) { return s->buffer; }
+const char *String_getBuffer(String s) { return s->buffer + s->offset; }
 
 void String_append(String s, String suffix) {
     size_t sLength = String_getLength(s);
@@ -57,16 +59,20 @@ void String_append(String s, String suffix) {
     size_t newLength = sLength + suffixLength;
     char *newBuffer = malloc(newLength);
 
+    const char *sBuffer = String_getBuffer(s);
+    const char *suffixBuffer = String_getBuffer(suffix);
+
     for (size_t i = 0; i < newLength; i++) {
         if (i < sLength) {
-            newBuffer[i] = s->buffer[i];
+            newBuffer[i] = sBuffer[i];
         } else {
-            newBuffer[i] = suffix->buffer[i - sLength];
+            newBuffer[i] = suffixBuffer[i - sLength];
         }
     }
 
     free(s->buffer);
     s->buffer = newBuffer;
+    s->offset = 0;
     s->length = newLength;
 
     return;
@@ -79,16 +85,20 @@ void String_prepend(String s, String prefix) {
     size_t newLength = sLength + prefixLength;
     char *newBuffer = malloc(newLength);
 
+    const char *sBuffer = String_getBuffer(s);
+    const char *prefixBuffer = String_getBuffer(prefix);
+
     for (size_t i = 0; i < newLength; i++) {
         if (i < prefixLength) {
-            newBuffer[i] = prefix->buffer[i];
+            newBuffer[i] = prefixBuffer[i];
         } else {
-            newBuffer[i] = s->buffer[i - prefixLength];
+            newBuffer[i] = sBuffer[i - prefixLength];
         }
     }
 
     free(s->buffer);
     s->buffer = newBuffer;
+    s->offset = 0;
     s->length = newLength;
 
     return;
@@ -104,8 +114,11 @@ bool String_equals(String s1, String s2) {
 
     bool isEqual = true;
 
+    const char *s1Buffer = String_getBuffer(s1);
+    const char *s2Buffer = String_getBuffer(s2);
+
     for (size_t i = 0; i < s1Length; i++) {
-        if (s1->buffer[i] != s2->buffer[i]) {
+        if (s1Buffer[i] != s2Buffer[i]) {
             isEqual = false;
             break;
         }
@@ -124,8 +137,11 @@ bool String_startsWith(String s1, String s2) {
 
     bool startsWith = true;
 
+    const char *s1Buffer = String_getBuffer(s1);
+    const char *s2Buffer = String_getBuffer(s2);
+
     for (size_t i = 0; i < s2Length; i++) {
-        if (s1->buffer[i] != s2->buffer[i]) {
+        if (s1Buffer[i] != s2Buffer[i]) {
             startsWith = false;
             break;
         }
@@ -144,8 +160,11 @@ bool String_endsWith(String s1, String s2) {
 
     bool endsWith = true;
 
+    const char *s1Buffer = String_getBuffer(s1);
+    const char *s2Buffer = String_getBuffer(s2);
+
     for (size_t i = 0; i < s2Length; i++) {
-        if (s1->buffer[s1Length - i - 1] != s2->buffer[s2Length - i - 1]) {
+        if (s1Buffer[s1Length - i - 1] != s2Buffer[s2Length - i - 1]) {
             endsWith = false;
             break;
         }
@@ -157,8 +176,8 @@ bool String_endsWith(String s1, String s2) {
 void String_print(String s) {
     // TODO check for null
     // TODO add check for super long string
-    unsigned length = (unsigned)s->length;
-    char *c = s->buffer;
+    unsigned length = (unsigned)String_getLength(s);
+    const char *c = String_getBuffer(s);
 
     printf("%.*s", length, c);
 
