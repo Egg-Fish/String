@@ -32,6 +32,10 @@ add_executable(test__String_trimLeadingWhitespace test/String_trimLeadingWhitesp
 target_link_libraries(test__String_trimLeadingWhitespace PRIVATE String unity)
 add_test(NAME Test:String_trimLeadingWhitespace COMMAND test__String_trimLeadingWhitespace)
 
+add_executable(test__String_splitByWhitespace test/String_splitByWhitespace.c)
+target_link_libraries(test__String_splitByWhitespace PRIVATE String unity)
+add_test(NAME Test:String_splitByWhitespace COMMAND test__String_splitByWhitespace)
+
 add_executable(test__String_append test/String_append.c)
 target_link_libraries(test__String_append PRIVATE String unity)
 add_test(NAME Test:String_append COMMAND test__String_append)

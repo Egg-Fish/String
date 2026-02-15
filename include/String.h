@@ -20,6 +20,8 @@ void String_trimLeadingWhitespace(String s);
 void String_trimTrailingWhitespace(String s);
 void String_trimWhitespace(String s);
 
+List String_splitByWhitespace(String s);
+
 void String_append(String s, String suffix);
 void String_prepend(String s, String prefix);
 

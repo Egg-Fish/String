@@ -144,6 +144,40 @@ void String_trimWhitespace(String s) {
     return;
 }
 
+List String_splitByWhitespace(String s) {
+    List l = List_create();
+
+    String_trimWhitespace(s);
+
+    const char *curr = String_getBuffer(s);
+    size_t length = String_getLength(s);
+    const char *end = curr + length;
+
+    while (true) {
+        while (curr != end && Char_isWhitespace(*curr)) {
+            curr++;
+        }
+
+        if (curr == end) {
+            break;
+        }
+
+        const char *tokenStart = curr;
+        size_t tokenLength = 0;
+
+        while (curr != end && !Char_isWhitespace(*curr)) {
+            tokenLength++;
+            curr++;
+        }
+
+        String token = String_createFromBuffer(tokenStart, tokenLength);
+
+        List_appendItem(l, token);
+    }
+
+    return l;
+}
+
 void String_append(String s, String suffix) {
     size_t sLength = String_getLength(s);
     size_t suffixLength = String_getLength(suffix);
