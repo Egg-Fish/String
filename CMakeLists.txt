@@ -6,12 +6,15 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # Library
 
+add_subdirectory(extern/List)
+
 add_library(String src/String.c)
 target_include_directories(String PUBLIC include)
 target_compile_options(String PRIVATE
   $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
   $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>
 )
+target_link_libraries(String PUBLIC List)
 
 # Testing
 

@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#include "List.h"
+
 typedef struct String *String;
 
 String String_createFromBuffer(const char *buffer, size_t bufferSize);
