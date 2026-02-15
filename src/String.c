@@ -118,6 +118,32 @@ void String_trimLeadingWhitespace(String s) {
     return;
 }
 
+void String_trimTrailingWhitespace(String s) {
+    const char *buffer = String_getBuffer(s);
+    size_t length = String_getLength(s);
+
+    size_t newLength = length;
+
+    while (newLength > 0) {
+        if (Char_isWhitespace(buffer[newLength - 1])) {
+            newLength--;
+        } else {
+            break;
+        }
+    }
+
+    String_setLength(s, newLength);
+
+    return;
+}
+
+void String_trimWhitespace(String s) {
+    String_trimLeadingWhitespace(s);
+    String_trimTrailingWhitespace(s);
+
+    return;
+}
+
 void String_append(String s, String suffix) {
     size_t sLength = String_getLength(s);
     size_t suffixLength = String_getLength(suffix);
