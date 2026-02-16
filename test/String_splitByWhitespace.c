@@ -61,12 +61,23 @@ void test__String_splitByWhitespace__sound__lipsumString(void) {
     property__String_splitByWhitespace__sound(s, t, 8);
 }
 
+void test__String_splitByWhitespace__sound__alphabetString(void) {
+    const char *s = "a b c d e f g h i j k l m n o p q r s t u v w x y z";
+    const char *t[26] = {
+        "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+        "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+    };
+
+    property__String_splitByWhitespace__sound(s, t, 26);
+}
+
 int main(void) {
     UNITY_BEGIN();
 
     RUN_TEST(test__String_splitByWhitespace__sound__emptyString);
     RUN_TEST(test__String_splitByWhitespace__sound__helloWorldString);
     RUN_TEST(test__String_splitByWhitespace__sound__lipsumString);
+    RUN_TEST(test__String_splitByWhitespace__sound__alphabetString);
 
     return UNITY_END();
 }
