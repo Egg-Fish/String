@@ -18,7 +18,9 @@ target_link_libraries(String PUBLIC List)
 
 # Testing
 
-add_subdirectory(extern/unity)
+if(NOT TARGET unity)
+    add_subdirectory(extern/unity)
+endif()
 
 enable_testing()
 
